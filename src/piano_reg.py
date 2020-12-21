@@ -1,10 +1,11 @@
 import yaml
 import json
 import MySQLdb
+from datetime import datetime
 from inverted_index import IVIndex
 from music_info import MusicInfo, MusicType
 
-with open('../global_params.yaml', 'r') as f:
+with open('/home/yangluyang/RetrievePianoAudio/global_params.yaml', 'r') as f:
     params = yaml.load(f.read())
 connection = MySQLdb.connect(host=params['db_host'], port=params['db_port'], user=params['db_user'], password=params['db_passwd'], database='Music', charset='utf8')
 db = connection.cursor()
@@ -34,9 +35,9 @@ def importMetaData():
             split = 1
         elif obj['split'] == 'test':
             split = 2
-        insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, year, duration,audio_filename, midi_filename) " \
-                     "values ('{}', '{}', '{}', '{}', '{}', '{}', '{}');".format(obj['canonical_title'], obj['canonical_composer'], split,
-                    int(obj['year']), int(obj['duration']), obj['audio_filename'], obj['midi_filename'])
+        insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, year, duration,audio_filename, midi_filename, create_time) " \
+                     "values ('{}', '{}', '{}', '{}', '{}', '{}', '{}, '{}');".format(obj['canonical_title'], obj['canonical_composer'], split,
+                    int(obj['year']), int(obj['duration']), obj['audio_filename'], obj['midi_filename'], datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         with connection:
             db.execute(insert_sql)
 
