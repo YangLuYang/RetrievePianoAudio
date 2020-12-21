@@ -26,10 +26,16 @@ def main():
 def importMetaData():
     path_to_json = '/data/disk4/dataset/piano/MAESTRO/raw/maestro-v1.0.0.json'
     with open(path_to_json, 'r') as fp:
-        maestro_meta = json.load(fp.read())
+        maestro_meta = json.loads(fp.read())
     for obj in maestro_meta:
+        if obj['split'] == 'train':
+            split = 0
+        elif obj['split'] == 'validation':
+            split = 1
+        elif obj['split'] == 'test':
+            split = 2
         insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, audio_filename, midi_filename) " \
-                     "values ('{}', '{}', '{}', '{}', '{}', '{}');".format(obj['canonical_title'], obj['canonical_composer'], obj['split'],
+                     "values ('{}', '{}', '{}', '{}', '{}');".format(obj['canonical_title'], obj['canonical_composer'], split,
                     obj['audio_filename'], obj['midi_filename'])
         with connection:
             db.execute(insert_sql)
