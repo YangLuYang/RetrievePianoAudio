@@ -34,9 +34,9 @@ def importMetaData():
             split = 1
         elif obj['split'] == 'test':
             split = 2
-        insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, year, audio_filename, midi_filename) " \
-                     "values ('{}', '{}', '{}', '{}', '{}', {}});".format(obj['canonical_title'], obj['canonical_composer'], split,
-                    int(obj['year']),obj['audio_filename'], obj['midi_filename'])
+        insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, year, duration,audio_filename, midi_filename) " \
+                     "values ('{}', '{}', '{}', '{}', '{}', '{}', '{}');".format(obj['canonical_title'], obj['canonical_composer'], split,
+                    int(obj['year']), int(obj['duration']), obj['audio_filename'], obj['midi_filename'])
         with connection:
             db.execute(insert_sql)
 
