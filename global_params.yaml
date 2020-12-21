@@ -1,0 +1,22 @@
+dataset_path: /data/disk4/dataset/piano/MAESTRO/raw
+count_zone_notes: 4
+min_pitch: 0
+max_pitch: 127
+top_k: 8
+near_delta: 2
+zones_per_logic_music: 1500
+overlap_zones: 100
+add_right_hand: 0
+frame_threshold: 0.5
+onset_threshold: 0.35
+split_points:
+        - 60
+match_zone_thres: 25
+match_thres: 0.15,
+match_thres_1: 0.05,
+critical_match_zone_thres: 150,
+retri_time_thres: 4,
+top1_retri_time_thres: 3,
+top1_score_thres: 0.7
+frame_per_second: 31.25
+

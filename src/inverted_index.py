@@ -1,8 +1,8 @@
 from multiprocessing import Lock
-from music_base import IndexContentArray, NotePair, IndexContent
-from music_info import MusicType
-from music_file import MusicFile
-from music_json import MusicJson
+from src.music_base import IndexContentArray, NotePair, IndexContent
+from src.music_info import MusicType
+from src.music_file import MusicFile
+from src.music_json import MusicJson
 
 class IVIndex():
     def __init__(self, count_zone_notes, min_pitch, max_pitch, zones_per_logic_music, overlap_zones,
@@ -134,7 +134,5 @@ class IVIndex():
         self.sum_logic_music += (logic_sequence_id + 1)
         self.curr_music_index += 1
 
-
-if __name__ == '__main__':
 
 

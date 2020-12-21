@@ -1,6 +1,7 @@
-from music_base import MusicBase, Frame
-from music_info import HandSwitch
 import json
+
+from src.music_base import MusicBase, Frame
+from src.music_info import HandSwitch
 
 class MusicJson(MusicBase):
     def __init__(self, music_id, music_name, music_path, zone_id='', note_num=0, frame_num=0, count_zone_notes=0, min_pitch=0, max_pitch=127, hand=HandSwitch.BOTH_HAND, frame_length_in_ms=32, onset_thres=0.5):

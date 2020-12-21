@@ -1,5 +1,6 @@
-from music_base import MusicBase, Frame
-from mido import MidiFile, Message
+from mido import MidiFile
+from src.music_base import MusicBase, Frame
+
 class MusicFile(MusicBase):
     def construct_frames(self):
         midi_data = MidiFile(self.music_path)
@@ -12,7 +13,6 @@ class MusicFile(MusicBase):
             if msg.type != 'note_on':
                 continue
             tick = msg.time
-            # tick相同，则在一帧
             # 一帧中的note的tick是相同的
             if tick > tickCurr:
                 # new frame comes
