@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 from intbitset import intbitset
-from src.music_info import HandSwitch
+from music_info import HandSwitch
 
 
 class MusicBase(ABC):

@@ -1,8 +1,8 @@
 import yaml
 import json
 import MySQLdb
-from src.inverted_index import IVIndex
-from src.music_info import MusicInfo, MusicType
+from inverted_index import IVIndex
+from music_info import MusicInfo, MusicType
 
 params = yaml.load('../global_params.yaml')
 connection = MySQLdb.connect(host=params['db_host'], port=params['db_port'], user=params['db_user'], password=params['db_passwd'], database='Music', charset='utf8')

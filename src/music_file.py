@@ -1,5 +1,5 @@
 from mido import MidiFile
-from src.music_base import MusicBase, Frame
+from music_base import MusicBase, Frame
 
 class MusicFile(MusicBase):
     def construct_frames(self):
