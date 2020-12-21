@@ -4,7 +4,8 @@ import MySQLdb
 from inverted_index import IVIndex
 from music_info import MusicInfo, MusicType
 
-params = yaml.load('../global_params.yaml')
+with open('../global_params.yaml', 'r') as f:
+    params = yaml.load(f.read())
 connection = MySQLdb.connect(host=params['db_host'], port=params['db_port'], user=params['db_user'], password=params['db_passwd'], database='Music', charset='utf8')
 db = connection.cursor()
 
