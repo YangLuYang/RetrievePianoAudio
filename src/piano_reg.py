@@ -28,18 +28,23 @@ def importMetaData():
     path_to_json = '/data/disk4/dataset/piano/MAESTRO/raw/maestro-v1.0.0.json'
     with open(path_to_json, 'r') as fp:
         maestro_meta = json.loads(fp.read())
-    for obj in maestro_meta:
-        if obj['split'] == 'train':
-            split = 0
-        elif obj['split'] == 'validation':
-            split = 1
-        elif obj['split'] == 'test':
-            split = 2
-        insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, year, duration,audio_filename, midi_filename, create_time) " \
-                     "values ('{}', '{}', '{}', '{}', '{}', '{}', '{}, '{}');".format(obj['canonical_title'], obj['canonical_composer'], split,
-                    int(obj['year']), int(obj['duration']), obj['audio_filename'], obj['midi_filename'], datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        with connection:
+    with connection:
+        delete_sql = "delete from musicinfo where 1=1;"
+        db.execute(delete_sql)
+        for obj in maestro_meta:
+            if obj['split'] == 'train':
+                split = 0
+            elif obj['split'] == 'validation':
+                split = 1
+            elif obj['split'] == 'test':
+                split = 2
+            canonical_title = obj['canonical_title'].replace("'", "\'")
+            canonical_composer = obj['canonical_composer'].replace("'", "\'")
+            insert_sql = "insert into musicinfo (canonical_title, canonical_composer, split, year, duration,audio_filename, midi_filename, create_time) " \
+                         "values ('{}', '{}', '{}', '{}', '{}', '{}', '{}, '{}');".format(canonical_title, canonical_composer, split,
+                        int(obj['year']), int(obj['duration']), obj['audio_filename'], obj['midi_filename'], datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             db.execute(insert_sql)
+            db.close()
 
 
 
